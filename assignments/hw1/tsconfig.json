@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "rootDir": "."
+  },
+  "include": [
+    "challenge-1-email/**/*",
+    "challenge-2-data-table/**/*",
+    "challenge-3-cache/**/*"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

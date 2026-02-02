@@ -1,0 +1,17 @@
+{
+  "name": "hw1-prompt-engineering",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test",
+    "test:email": "bun test challenge-1-email",
+    "test:cache": "bun test challenge-3-cache",
+    "dev": "cd challenge-2-data-table && bun run dev",
+    "build": "cd challenge-2-data-table && bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.9.3"
+  }
+}
