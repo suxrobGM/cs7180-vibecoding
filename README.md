@@ -53,32 +53,7 @@ bun install
 
 ## Running Assignments
 
-### HW1: Prompt Engineering Battle
-
-```bash
-cd assignments/hw1
-
-# Run all tests
-bun test
-
-# Run specific challenge tests
-bun test:email     # Challenge 1: Email Validation
-bun test:cache     # Challenge 3: Caching Layer
-
-# Start React dev server (Challenge 2: Data Table)
-bun run dev
-
-# Build React app
-bun run build
-```
-
-### Challenge-Specific Commands
-
-| Challenge           | Command                      | Description                             |
-| ------------------- | ---------------------------- | --------------------------------------- |
-| 1. Email Validation | `bun test challenge-1-email` | Run email validator tests               |
-| 2. Data Table       | `bun run dev`                | Start Vite dev server at localhost:5173 |
-| 3. Caching Layer    | `bun test challenge-3-cache` | Run cache tests                         |
+Each assignment has its own readme file in the root folder, containing instructions on how to run and test it.
 
 ## Assignment Deliverables
 
