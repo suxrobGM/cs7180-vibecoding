@@ -1,6 +1,6 @@
 # Challenge 1: Email Validation - Prompt Iterations
 
-## Version 1 (Basic)
+## Version 1
 
 **Prompt:**
 
@@ -23,7 +23,7 @@ Write a function to validate email addresses.
 
 ---
 
-## Version 2 (Improved)
+## Version 2
 
 **Prompt:**
 
@@ -60,7 +60,7 @@ Include test cases for each edge case.
 
 ---
 
-## Version 3 (Final)
+## Version 3
 
 **Prompt:**
 

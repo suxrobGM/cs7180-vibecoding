@@ -1,6 +1,6 @@
 # Challenge 3: Caching Layer - Prompt Iterations
 
-## Version 1 (Basic)
+## Version 1
 
 **Prompt:**
 
@@ -23,7 +23,7 @@ Create a caching system with TTL and LRU eviction.
 
 ---
 
-## Version 2 (Improved)
+## Version 2
 
 **Prompt:**
 
@@ -60,7 +60,7 @@ Include methods: get, set, delete, clear, has
 
 ---
 
-## Version 3 (Final)
+## Version 3
 
 **Prompt:**
 
@@ -151,7 +151,7 @@ Write clean, well-structured code. Prioritize correctness and clarity.
 
 ---
 
-## Version 4 (Modular Adapter Architecture)
+## Version 4
 
 **Prompt:**
 

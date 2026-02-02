@@ -1,6 +1,6 @@
 # Challenge 2: React Data Table - Prompt Iterations
 
-## Version 1 (Basic)
+## Version 1
 
 **Prompt:**
 
@@ -23,7 +23,7 @@ Create a React data table component with sorting, filtering, and pagination.
 
 ---
 
-## Version 2 (Improved)
+## Version 2
 
 **Prompt:**
 
@@ -61,7 +61,7 @@ Use functional components with hooks.
 
 ---
 
-## Version 3 (Final)
+## Version 3
 
 **Prompt:**
 
@@ -132,7 +132,7 @@ Provide clean, readable code with minimal comments.
 
 ---
 
-## Version 4 (React 19 + Tailwind v4)
+## Version 4
 
 **Prompt:**
 
