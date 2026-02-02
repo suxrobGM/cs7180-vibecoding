@@ -1,11 +1,23 @@
 import type { ReactElement } from "react";
 import type { ColumnDef } from "./types";
 
+/**
+ * Props for the TableBody component.
+ * @template T - The type of data row
+ */
 interface TableBodyProps<T> {
+  /** Array of data rows to display */
   data: T[];
+  /** Column definitions for rendering cells */
   columns: ColumnDef<T>[];
 }
 
+/**
+ * Renders the table body with data rows.
+ * Displays an empty state message when no data matches the filter.
+ * @template T - The type of data row
+ * @param props - Component props
+ */
 export function TableBody<T>(props: TableBodyProps<T>): ReactElement {
   const { data, columns } = props;
 

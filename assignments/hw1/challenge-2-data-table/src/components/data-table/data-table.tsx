@@ -5,13 +5,37 @@ import { TableHeader } from "./table-header";
 import { TablePagination } from "./table-pagination";
 import type { ColumnDef, SortState } from "./types";
 
+/**
+ * Props for the DataTable component.
+ * @template T - The type of data row
+ */
 export interface DataTableProps<T> {
+  /** Array of data objects to display */
   data: T[];
+  /** Column definitions */
   columns: ColumnDef<T>[];
+  /** Initial number of rows per page (default: 10) */
   pageSize?: number;
+  /** Available page size options (default: [10, 25, 50]) */
   pageSizeOptions?: number[];
 }
 
+/**
+ * A generic data table with sorting, filtering, and pagination.
+ * @template T - The type of data row
+ * @param props - Component props
+ *
+ * @example
+ * ```tsx
+ * <DataTable
+ *   data={users}
+ *   columns={[
+ *     { key: 'name', header: 'Name', sortable: true },
+ *     { key: 'email', header: 'Email' }
+ *   ]}
+ * />
+ * ```
+ */
 export function DataTable<T>(props: DataTableProps<T>): ReactElement {
   const { data, columns, pageSize: initialPageSize = 10, pageSizeOptions = [10, 25, 50] } = props;
 

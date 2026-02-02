@@ -1,13 +1,23 @@
 import type { ReactElement } from "react";
 
+/** Props for the TableFilter component */
 interface TableFilterProps {
+  /** Current filter text value */
   filter: string;
+  /** Callback when filter text changes */
   onFilterChange: (value: string) => void;
+  /** Current page size */
   pageSize: number;
+  /** Available page size options */
   pageSizeOptions: number[];
+  /** Callback when page size changes */
   onPageSizeChange: (size: number) => void;
 }
 
+/**
+ * Renders the filter input and page size selector.
+ * @param props - Component props
+ */
 export function TableFilter(props: TableFilterProps): ReactElement {
   const { filter, onFilterChange, pageSize, pageSizeOptions, onPageSizeChange } = props;
 

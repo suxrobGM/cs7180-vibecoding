@@ -1,10 +1,19 @@
-import { MemoryAdapter } from "./adapters/memory-adapter";
+import { MemoryAdapter } from "./adapters";
 import type { CacheEntry, StorageAdapter } from "./types";
 
+/**
+ * Configuration options for the Cache instance.
+ * @template K - The type of cache keys
+ * @template V - The type of cached values
+ */
 export interface CacheConfig<K, V> {
+  /** Maximum number of entries before LRU eviction (default: 100) */
   maxSize?: number;
+  /** Default TTL in milliseconds for entries without explicit TTL (default: null = no expiration) */
   defaultTTL?: number;
+  /** Storage adapter for persistence (default: MemoryAdapter) */
   storage?: StorageAdapter<K, V>;
+  /** Whether to persist on every change (default: true) */
   persistOnChange?: boolean;
 }
 
@@ -15,6 +24,16 @@ export interface CacheConfig<K, V> {
  * - Time-to-live (TTL) per entry or default
  * - Least Recently Used (LRU) eviction when full
  * - Pluggable persistence via StorageAdapter
+ *
+ * @template K - The type of cache keys
+ * @template V - The type of cached values
+ *
+ * @example
+ * ```typescript
+ * const cache = new Cache<string, User>({ maxSize: 50, defaultTTL: 60000 });
+ * await cache.set('user:1', { name: 'Alice' });
+ * const user = await cache.get('user:1');
+ * ```
  */
 export class Cache<K, V> {
   private data: Map<K, CacheEntry<V>> = new Map();
@@ -34,7 +53,8 @@ export class Cache<K, V> {
   }
 
   /**
-   * Initialize the cache by loading from storage
+   * Initialize the cache by loading from storage.
+   * Called automatically on first cache operation.
    */
   private async init(): Promise<void> {
     if (this.initialized) return;
@@ -66,7 +86,9 @@ export class Cache<K, V> {
   }
 
   /**
-   * Update access order for LRU tracking
+   * Update access order for LRU tracking.
+   * Moves the key to the end of the access order list.
+   * @param key - The cache key to mark as recently accessed
    */
   private touch(key: K): void {
     const index = this.accessOrder.indexOf(key);
@@ -92,7 +114,9 @@ export class Cache<K, V> {
   }
 
   /**
-   * Check if an entry has expired
+   * Check if an entry has expired based on its TTL.
+   * @param entry - The cache entry to check
+   * @returns True if the entry has expired, false otherwise
    */
   private isExpired(entry: CacheEntry<V>): boolean {
     if (entry.expiresAt === null) return false;
@@ -100,7 +124,7 @@ export class Cache<K, V> {
   }
 
   /**
-   * Persist to storage if enabled
+   * Persist current cache state to storage if persistOnChange is enabled.
    */
   private async persist(): Promise<void> {
     if (this.persistOnChange) {
@@ -109,7 +133,10 @@ export class Cache<K, V> {
   }
 
   /**
-   * Get a value from the cache
+   * Get a value from the cache.
+   * Returns undefined if the key doesn't exist or has expired.
+   * @param key - The key to retrieve
+   * @returns A promise that resolves to the value, or undefined if not found
    */
   async get(key: K): Promise<V | undefined> {
     await this.init();
@@ -131,7 +158,11 @@ export class Cache<K, V> {
   }
 
   /**
-   * Set a value in the cache
+   * Set a value in the cache.
+   * If the cache is at capacity, the least recently used entry is evicted.
+   * @param key - The key to store the value under
+   * @param value - The value to cache
+   * @param ttl - Optional TTL in milliseconds (overrides defaultTTL)
    */
   async set(key: K, value: V, ttl?: number): Promise<void> {
     await this.init();
@@ -167,7 +198,8 @@ export class Cache<K, V> {
   }
 
   /**
-   * Delete a key from the cache
+   * Delete a key from the cache.
+   * @param key - The key to delete
    */
   async delete(key: K): Promise<void> {
     await this.init();
@@ -182,7 +214,9 @@ export class Cache<K, V> {
   }
 
   /**
-   * Check if a key exists (and is not expired)
+   * Check if a key exists in the cache and is not expired.
+   * @param key - The key to check
+   * @returns A promise that resolves to true if the key exists and is valid
    */
   async has(key: K): Promise<boolean> {
     await this.init();
@@ -199,7 +233,7 @@ export class Cache<K, V> {
   }
 
   /**
-   * Clear all entries
+   * Clear all entries from the cache and storage.
    */
   async clear(): Promise<void> {
     await this.init();
@@ -211,25 +245,28 @@ export class Cache<K, V> {
   }
 
   /**
-   * Get the current size of the cache
+   * Get the current number of entries in the cache.
+   * Note: May include expired entries that haven't been cleaned up yet.
+   * @returns The number of entries in the cache
    */
   size(): number {
     return this.data.size;
   }
 
   /**
-   * Get all keys (including potentially expired ones)
+   * Get all keys currently in the cache.
+   * Note: May include keys for expired entries that haven't been cleaned up yet.
+   * @returns An array of all cache keys
    */
   keys(): K[] {
     return Array.from(this.data.keys());
   }
 
   /**
-   * Force persist to storage
+   * Force persist the current cache state to storage.
+   * Useful when persistOnChange is disabled and manual save is needed.
    */
   async save(): Promise<void> {
     await this.storage.save(this.data);
   }
 }
-
-export default Cache;

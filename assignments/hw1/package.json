@@ -9,9 +9,5 @@
     "test:cache": "bun test challenge-3-cache",
     "dev": "cd challenge-2-data-table && bun run dev",
     "build": "cd challenge-2-data-table && bun run build"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "^5.9.3"
   }
 }

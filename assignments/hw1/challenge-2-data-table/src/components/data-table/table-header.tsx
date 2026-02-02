@@ -1,21 +1,36 @@
 import type { ReactElement } from "react";
 import type { ColumnDef, SortState } from "./types";
 
+/**
+ * Props for the TableHeader component.
+ * @template T - The type of data row
+ */
 interface TableHeaderProps<T> {
+  /** Column definitions */
   columns: ColumnDef<T>[];
+  /** Current sort state */
   sort: SortState<T>;
+  /** Callback when a column header is clicked for sorting */
   onSort: (column: keyof T & string) => void;
 }
 
-function getSortIndicator<T>(
-  column: ColumnDef<T>,
-  sort: SortState<T>,
-): string | null {
+/**
+ * Returns the appropriate sort indicator for a column.
+ * @param column - The column definition
+ * @param sort - Current sort state
+ * @returns Sort indicator string or null
+ */
+function getSortIndicator<T>(column: ColumnDef<T>, sort: SortState<T>): string | null {
   if (!column.sortable) return null;
   if (sort.column !== column.key) return " ⇅";
   return sort.direction === "asc" ? " ▲" : " ▼";
 }
 
+/**
+ * Renders the table header row with sortable column headers.
+ * @template T - The type of data row
+ * @param props - Component props
+ */
 export function TableHeader<T>(props: TableHeaderProps<T>): ReactElement {
   const { columns, sort, onSort } = props;
 

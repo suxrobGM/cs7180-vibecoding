@@ -19,6 +19,9 @@
  * \.                   - Required dot before TLD
  * [a-zA-Z]{2,}         - TLD must be at least 2 letters
  * $                    - End of string
+ *
+ * @param email Email address to check
+ * @returns True if the given email address is valid email
  */
 export function isValidEmail(email: string): boolean {
   // Quick sanity checks

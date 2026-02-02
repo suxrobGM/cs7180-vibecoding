@@ -1,13 +1,23 @@
 import type { ReactElement } from "react";
 
+/** Props for the TablePagination component */
 interface TablePaginationProps {
+  /** Current active page (1-indexed) */
   currentPage: number;
+  /** Total number of pages */
   totalPages: number;
+  /** Total number of results after filtering */
   totalResults: number;
+  /** Number of results currently displayed */
   displayedResults: number;
+  /** Callback when page changes */
   onPageChange: (page: number) => void;
 }
 
+/**
+ * Renders pagination controls with previous/next buttons and page info.
+ * @param props - Component props
+ */
 export function TablePagination(props: TablePaginationProps): ReactElement {
   const { currentPage, totalPages, totalResults, displayedResults, onPageChange } = props;
   const isFirstPage = currentPage === 1;

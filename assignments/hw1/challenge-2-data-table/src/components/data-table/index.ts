@@ -1,6 +1,6 @@
-export { DataTable } from "./data-table";
-export { TableFilter } from "./table-filter";
-export { TableHeader } from "./table-header";
-export { TableBody } from "./table-body";
-export { TablePagination } from "./table-pagination";
-export type { ColumnDef, SortDirection, SortState } from "./types";
+export * from "./data-table";
+export * from "./table-filter";
+export * from "./table-header";
+export * from "./table-body";
+export * from "./table-pagination";
+export * from "./types";
