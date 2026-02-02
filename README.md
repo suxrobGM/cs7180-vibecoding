@@ -44,7 +44,7 @@ cs7180-vibecoding/
 
 ```bash
 # Clone the repository
-git clone <https://github.com/suxrobGM/cs7180-vibecoding>
+git clone https://github.com/suxrobGM/cs7180-vibecoding
 cd cs7180-vibecoding
 
 # Install all dependencies
